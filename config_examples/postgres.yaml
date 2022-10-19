@@ -1,0 +1,14 @@
+default_pulling_interval: 100
+token:  <COLLECTOR_TOKEN> 
+platform_host_url: <ODD_PLATFORM_URL> # http://localhost:8080
+profilers:
+  - type: postgres
+    name: my_postgres
+    host: localhost
+    port: 5432
+    username: postgres 
+    password: "" # Optional, default SecretStr("")
+    database: database
+    tables: ["table_name"] # Optional
+                           # If present - profiler generates statistics only for tables from the list
+                           # If skipped - profiler generates statistics for all tables

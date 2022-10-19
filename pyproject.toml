@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "odd-collector-profiler"
+version = "0.1.0"
+description = ""
+authors = ["Pavel Mackarichev <vixtir90@gmail.com>"]
+readme = "README.md"
+packages = [{include = "odd_collector_profiler"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.11"
+SQLAlchemy = "^1.4.41"
+scipy = "^1.9.1"
+DataProfiler = "^0.8.1"
+psycopg2 = "^2.9.3"
+odd-collector-sdk = "^0.3.3"
+oddrn-generator = "^0.1.52"
+isort = "^5.10.1"
+tzlocal = "^4.2"
+funcy = "^1.17"
+
+
+[tool.poetry.group.dev.dependencies]
+isort = "^5.10.1"
+black = "22.3.0"
+pytest = "6.2.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
