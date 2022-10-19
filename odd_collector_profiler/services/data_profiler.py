@@ -6,10 +6,12 @@ from dataprofiler import Profiler, dp_logging
 from funcy import first
 from pandas import DataFrame
 
-from odd_collector_profiler.domain.statistics import (ColumnStatistic,
-                                                      DatetimeColumnStatistic,
-                                                      IntColumnStatistic,
-                                                      StringColumnStatistic)
+from odd_collector_profiler.domain.statistics import (
+    ColumnStatistic,
+    DatetimeColumnStatistic,
+    IntColumnStatistic,
+    StringColumnStatistic,
+)
 from odd_collector_profiler.utils.datetime import parse_datetime
 
 dp_logging.set_verbosity(logging.ERROR)

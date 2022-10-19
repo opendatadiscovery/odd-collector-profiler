@@ -9,8 +9,9 @@ from odd_collector_sdk.api.datasource_api import DataSourceApi
 from odd_collector_sdk.api.http_client import HttpClient
 from odd_models.models import DatasetStatisticsList
 
-from odd_collector_profiler.domain.collector_profiler_config import \
-    CollectorProfilerConfig
+from odd_collector_profiler.domain.collector_profiler_config import (
+    CollectorProfilerConfig,
+)
 from odd_collector_profiler.domain.profiler import Profiler
 from odd_collector_profiler.errors import MissedRegisterFunction
 from odd_collector_profiler.helpers.task_runner import TaskRunner

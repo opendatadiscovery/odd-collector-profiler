@@ -1,19 +1,16 @@
 from typing import Any, Dict, List, Tuple
 
 from funcy import lmap
-from odd_models.models import (DataSetFieldStat, DataSetStatistics,
-                               DatasetStatisticsList)
+from odd_models.models import DataSetFieldStat, DataSetStatistics, DatasetStatisticsList
 from oddrn_generator import PostgresqlGenerator
 from sqlalchemy.engine import Connection
 
 from odd_collector_profiler.domain.config import PostgresConfig
 from odd_collector_profiler.domain.profiler import Profiler
-from odd_collector_profiler.domain.statistics.column_statistic import \
-    ColumnStatistic
+from odd_collector_profiler.domain.statistics.column_statistic import ColumnStatistic
 from odd_collector_profiler.helpers.sql_dialect import SQLDialect
 from odd_collector_profiler.profilers import DATA_PROFILER
-from odd_collector_profiler.services.data_frame_reader import \
-    TableDataframeReader
+from odd_collector_profiler.services.data_frame_reader import TableDataframeReader
 from odd_collector_profiler.services.data_profiler import DataProfiler
 
 
