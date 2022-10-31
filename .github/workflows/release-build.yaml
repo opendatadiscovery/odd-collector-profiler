@@ -1,4 +1,4 @@
-name: ODD Collector release
+name: Release ODD Collector Profiler
 
 on:
   release:
@@ -17,9 +17,11 @@ jobs:
       - uses: psf/black@stable
         with:
           options: "--check --verbose"
-          src: "./odd_collector"
+          src: "./odd_collector_profiler"
           version: "22.3.0"
+      - uses: jamescurtin/isort-action@master
   build_and_push:
+    needs: lint
     runs-on: ubuntu-latest
     name: Build and push docker image to GHCR
     steps:
@@ -32,7 +34,6 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.ORG_TOKEN_GHCR }}
-
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v3
