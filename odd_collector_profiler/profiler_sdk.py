@@ -1,6 +1,7 @@
 import asyncio
 import importlib
 from functools import partial
+from pathlib import Path
 from typing import Any, Dict
 
 from aiohttp import ClientSession
@@ -9,9 +10,8 @@ from odd_collector_sdk.api.datasource_api import DataSourceApi
 from odd_collector_sdk.api.http_client import HttpClient
 from odd_models.models import DatasetStatisticsList
 
-from odd_collector_profiler.domain.collector_profiler_config import (
-    CollectorProfilerConfig,
-)
+from odd_collector_profiler.domain.collector_profiler_config import \
+    CollectorProfilerConfig
 from odd_collector_profiler.domain.profiler import Profiler
 from odd_collector_profiler.errors import MissedRegisterFunction
 from odd_collector_profiler.helpers.task_runner import TaskRunner
@@ -30,8 +30,8 @@ def register_profiler(cfg: Dict[str, Any]):
 
 
 class ProfilerSDK:
-    def __init__(self, config_path: str):
-        self.config = CollectorProfilerConfig.from_yaml(config_path)
+    def __init__(self, config_path: Path):
+        self.config = CollectorProfilerConfig.from_yaml(str(config_path))
         self.client = HttpClient(self.config.token)
         self.api = DataSourceApi(self.client, self.config.platform_host_url)
         self.task_runner = TaskRunner(

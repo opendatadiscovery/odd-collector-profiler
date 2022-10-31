@@ -22,10 +22,11 @@ class TableDataframeReader(DataFrameReader):
 
     def read(self) -> pd.DataFrame:
         try:
-            return pd.read_sql_table(
+            df = pd.read_sql_table(
                 table_name=self.table,
                 schema=self.schema,
                 con=self.connection,
             )
+            return df
         except Exception as e:
-            logging.error("Getting data frame", exc_info=True)
+            logging.error(f"Getting data frame, {e}", exc_info=True)

@@ -1,31 +1,35 @@
-from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional
+from typing import List
 
+import pytz
 from odd_models.models import DataSetFieldStat, DateTimeFieldStat
 
 from .column_statistic import ColumnStatistic
 
 
-@dataclass
 class DatetimeColumnStatistic(ColumnStatistic):
-    low_value: datetime
-    high_value: datetime
-    mean_value: Optional[int]
-    median_value: Optional[int]
-    nulls_count: int
-    unique_count: int
+    def __init__(
+        self,
+        column_name: str,
+        low_value: datetime,
+        high_value: datetime,
+        nulls_count: int,
+        unique_count: int,
+        tags: List[str] = None,
+    ) -> None:
+        super().__init__(column_name, tags)
+        self.low_value = low_value
+        self.high_value = high_value
+        self.nulls_count = nulls_count
+        self.unique_count = unique_count
 
     def to_odd(self, oddrn: str) -> DataSetFieldStat:
-        return DataSetFieldStat(
-            tags=[],
-            field_oddrn=oddrn,
-            datetime_stats=DateTimeFieldStat(
-                low_value=self.low_value,
-                high_value=self.high_value,
-                mean_value=self.mean_value,
-                median_value=self.median_value,
-                nulls_count=self.nulls_count,
-                unique_count=self.unique_count,
-            ),
+        data_entity = super().to_odd(oddrn)
+        data_entity.datetime_stats = DateTimeFieldStat(
+            low_value=self.low_value.replace(tzinfo=pytz.utc).isoformat(),
+            high_value=self.high_value.replace(tzinfo=pytz.utc).isoformat(),
+            nulls_count=self.nulls_count,
+            unique_count=self.unique_count,
         )
+
+        return data_entity
