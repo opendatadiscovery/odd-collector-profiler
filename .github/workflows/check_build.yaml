@@ -2,11 +2,11 @@ name: Lint and build ODD collector profiler
 
 on:
   workflow_dispatch:
-    pull_request:
-      types: [ 'opened', 'edited', 'reopened', 'synchronize' ]
-    push:
-      branches:
-        - "main"
+  pull_request:
+    types: [ 'opened', 'edited', 'reopened', 'synchronize' ]
+  push:
+    branches:
+      - "main"
 
 env:
   IMAGE_NAME: ${{ github.event.repository.name }}
