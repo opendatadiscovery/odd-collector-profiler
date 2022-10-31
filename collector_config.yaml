@@ -8,5 +8,5 @@ profilers:
     port: 5432
     username: postgres
     password: ""
-    database: table
+    database: db_name
     tables: []
