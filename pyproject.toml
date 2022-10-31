@@ -10,13 +10,17 @@ packages = [{include = "odd_collector_profiler"}]
 python = ">=3.9,<3.11"
 SQLAlchemy = "^1.4.41"
 scipy = "^1.9.1"
-DataProfiler = "^0.8.1"
+DataProfiler = [
+    {version="0.8.1", markers="sys_platform =='darwin'"},
+    {version="0.8.1", extras=["ml"], markers="sys_platform =='linux'"}
+]
 psycopg2 = "^2.9.3"
 odd-collector-sdk = "^0.3.3"
 oddrn-generator = "^0.1.52"
 isort = "^5.10.1"
 tzlocal = "^4.2"
 funcy = "^1.17"
+
 
 [tool.poetry.group.dev.dependencies]
 isort = "^5.10.1"
