@@ -17,8 +17,8 @@ from odd_collector_profiler.domain.collector_profiler_config import (
 from odd_collector_profiler.domain.profiler import Profiler
 from odd_collector_profiler.errors import MissedRegisterFunction
 from odd_collector_profiler.helpers.task_runner import TaskRunner
-from odd_collector_profiler.utils.tasks import handle_tasks
 from odd_collector_profiler.logger import logger
+from odd_collector_profiler.utils.tasks import handle_tasks
 
 
 def register_profiler(cfg: Dict[str, Any]):

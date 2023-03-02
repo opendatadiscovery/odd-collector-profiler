@@ -21,6 +21,7 @@ dataprofiler = {version = "^0.8.8", extras = ["full"]}
 isort = "^5.10.1"
 black = "22.3.0"
 pytest = "6.2.5"
+pre-commit = "^3.1.1"
 
 [tool.isort]
 profile = "black"
