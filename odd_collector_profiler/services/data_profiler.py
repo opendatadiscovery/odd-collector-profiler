@@ -13,6 +13,7 @@ from odd_collector_profiler.domain.statistics import (
     NumberColumnStatistic,
     StringColumnStatistic,
 )
+from odd_collector_profiler.logger import logger
 from odd_collector_profiler.utils.datetime import parse_datetime
 
 dp_logging.set_verbosity(logging.ERROR)
@@ -29,11 +30,9 @@ class DataProfiler(ABC):
 
 class DefaultDataProfiler(DataProfiler):
     def from_data_frame(self, df: DataFrame) -> Iterable[ColumnStatistic]:
-        df.to_csv("df.csv")
         columns_statistics = (
             Profiler(data=df, profiler_type="structured").report().get("data_stats")
         )
-
         return lkeep(self.__map_statistic, columns_statistics)
 
     def __map_statistic(self, column_stat: Dict[str, Any]) -> Optional[ColumnStatistic]:
@@ -50,7 +49,7 @@ class DefaultDataProfiler(DataProfiler):
         }
 
         if column_type not in get_statistics_for:
-            logging.debug(f"unknown type for {column_name} with type {column_type}")
+            logger.debug(f"Unknown type for {column_name} with type {column_type}")
             return None
 
         column_statistics = get_statistics_for[column_type](column_name, statistics)

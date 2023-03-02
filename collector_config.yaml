@@ -1,5 +1,5 @@
 default_pulling_interval: 100
-token:  <COLLECTOR_TOKEN>
+token:  U7hBxf6aJIz8Vv4ptatm5C7uGQHoEhuWCJGsbQHb
 platform_host_url: http://localhost:8080
 profilers:
   - type: postgres
@@ -8,5 +8,4 @@ profilers:
     port: 5432
     username: postgres
     password: ""
-    database: db_name
-    tables: []
+    database: fake_pii

@@ -1,9 +1,11 @@
-import logging
+import traceback
 from abc import ABC, abstractmethod
 from typing import Optional
 
 import pandas as pd
 from sqlalchemy.engine import Connection
+
+from odd_collector_profiler.logger import logger
 
 
 class DataFrameReader(ABC):
@@ -22,11 +24,11 @@ class TableDataframeReader(DataFrameReader):
 
     def read(self) -> pd.DataFrame:
         try:
-            df = pd.read_sql_table(
+            return pd.read_sql_table(
                 table_name=self.table,
                 schema=self.schema,
                 con=self.connection,
             )
-            return df
         except Exception as e:
-            logging.error(f"Getting data frame, {e}", exc_info=True)
+            logger.debug(traceback.format_exc())
+            logger.error(f"Getting data frame, {e}")
