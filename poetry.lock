@@ -1558,14 +1558,14 @@ signedtoken = ["cryptography (>=3.0.0)", "pyjwt (>=2.0.0,<3)"]
 
 [[package]]
 name = "odd-collector-sdk"
-version = "0.3.18"
+version = "0.3.20"
 description = "ODD Collector"
 category = "main"
 optional = false
 python-versions = ">=3.9,<4.0"
 files = [
-    {file = "odd_collector_sdk-0.3.18-py3-none-any.whl", hash = "sha256:f24c0b5ffa2571b23986348045c8b014537bc59af083f408ced37d41df2a9734"},
-    {file = "odd_collector_sdk-0.3.18.tar.gz", hash = "sha256:3ea83b2666185e4cc5236def1af83df5161e8b9f8684f3d17f406a8a3c42ecd1"},
+    {file = "odd_collector_sdk-0.3.20-py3-none-any.whl", hash = "sha256:84b8acbd9a1f0a765c18808bb6a678c1b025e67d5d878a1fad1716948bffbba7"},
+    {file = "odd_collector_sdk-0.3.20.tar.gz", hash = "sha256:739e09186ad8afc76677e366599e6a62dd23cd8579ec792318a1f64243d5229d"},
 ]
 
 [package.dependencies]
@@ -1574,21 +1574,21 @@ APScheduler = ">=3.8.1,<4.0.0"
 funcy = ">=1.17,<2.0"
 importlib-metadata = ">=5.1.0,<6.0.0"
 loguru = ">=0.6.0,<0.7.0"
-odd-models = ">=2.0.21,<3.0.0"
+odd-models = ">=2.0.23,<3.0.0"
 pyaml-env = ">=1.1.5,<2.0.0"
 pydantic = ">=1.8.2,<2.0.0"
 tqdm = ">=4.64.1,<5.0.0"
 
 [[package]]
 name = "odd-models"
-version = "2.0.21"
+version = "2.0.23"
 description = "Open Data Discovery Models"
 category = "main"
 optional = false
 python-versions = ">=3.9,<4.0"
 files = [
-    {file = "odd_models-2.0.21-py3-none-any.whl", hash = "sha256:1762e1e36b14a05c37bb834007ef7a9a5b9ec501f51cee0d5929b6a9a0707c73"},
-    {file = "odd_models-2.0.21.tar.gz", hash = "sha256:e1da16e7dbc61cb4af13f6eb6c53ecae406fbe961099e031dff29149f17a7e4b"},
+    {file = "odd_models-2.0.23-py3-none-any.whl", hash = "sha256:3ea7a24d45eac7ab5d6765db7c436fb42705d37f45fc2ab0f0a8e4683a2d69db"},
+    {file = "odd_models-2.0.23.tar.gz", hash = "sha256:675d918deb06931cfc46ce01cafbf7bbc801aac3069978040555085b0b90a374"},
 ]
 
 [package.dependencies]
@@ -1597,6 +1597,21 @@ pydantic = ">=1.9.1,<2.0.0"
 requests = "2.28.2"
 sql-metadata = ">=2.6.0,<3.0.0"
 sqlparse = "0.4.2"
+
+[[package]]
+name = "oddrn-generator"
+version = "0.1.70"
+description = "Open Data Discovery Resource Name Generator"
+category = "main"
+optional = false
+python-versions = ">=3.9,<4.0"
+files = [
+    {file = "oddrn_generator-0.1.70-py3-none-any.whl", hash = "sha256:3ecba9be10395baf3a5c6cbdb8a76e6e92503b147ea3928e0bc4f42d16c79e42"},
+    {file = "oddrn_generator-0.1.70.tar.gz", hash = "sha256:99975cea1825436b04c0aac2bcfbb118bc961517ef5ae2b6eca7f4f24ae547bb"},
+]
+
+[package.dependencies]
+pydantic = ">=1.9.1,<2.0.0"
 
 [[package]]
 name = "opt-einsum"
@@ -3263,4 +3278,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.11"
-content-hash = "79188b212a338b30eda13cf747fce0268bdebc0d18e351478e45810f4879a5fc"
+content-hash = "06c387780ab4deefcfb7700457165781abdbf20ac417dff837926814eef1a008"
