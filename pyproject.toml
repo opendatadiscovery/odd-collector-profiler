@@ -16,6 +16,7 @@ tzlocal = "^4.2"
 funcy = "^1.17"
 dataprofiler = {version = "^0.8.8", extras = ["full"]}
 oddrn-generator = "^0.1.70"
+pyodbc = "^4.0.35"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -28,5 +29,5 @@ pre-commit = "^3.1.1"
 profile = "black"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core", "cython"]
 build-backend = "poetry.core.masonry.api"

@@ -1,11 +1,11 @@
 default_pulling_interval: 100
-token:
+token: <token>
 platform_host_url: http://localhost:8080
 profilers:
-  - type: postgres
-    name: my_postgres
+  - type: <type>
+    name: <name>
     host: localhost
-    port: 5432
-    username: postgres
-    password: ""
-    database:
+    username: <user>
+    password: <password>
+    port: <port>
+    database: <database>
