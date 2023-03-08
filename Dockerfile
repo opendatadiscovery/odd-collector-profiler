@@ -1,4 +1,4 @@
-FROM python:3.9.12-slim-buster AS python
+FROM python:3.9.16-slim AS python
 ENV PATH=$PATH:/root/.local/bin
 WORKDIR /app
 
