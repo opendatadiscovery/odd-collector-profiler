@@ -28,7 +28,7 @@ class TableDataframeReader(DataFrameReader):
                 table_name=self.table,
                 schema=self.schema,
                 con=self.connection,
-            )
+            ).head(5000) #make stats by first 5000 rows to save time and capacity. The exact stats are not required
         except Exception as e:
             logger.debug(traceback.format_exc())
             logger.error(f"Getting data frame, {e}")
