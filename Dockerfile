@@ -10,16 +10,14 @@ RUN apt-get update && \
     unixodbc \
     unixodbc-dev 
 
+RUN curl -s -o microsoft.asc https://packages.microsoft.com/keys/microsoft.asc \
+    && curl -s -o mssql-release.list https://packages.microsoft.com/config/debian/10/prod.list \
+    && apt-get install -y g++
+
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
 FROM python AS build
 COPY poetry.lock pyproject.toml ./
-
-# For pyodbc
-RUN curl -s -o microsoft.asc https://packages.microsoft.com/keys/microsoft.asc \
-    && curl -s -o mssql-release.list https://packages.microsoft.com/config/debian/10/prod.list \
-    && apt-get update -y \
-    && apt-get install -y g++ unixodbc-dev
 
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-root --no-dev -vvv
