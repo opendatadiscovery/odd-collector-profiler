@@ -29,6 +29,7 @@ class PostgresConfig(DatabaseConfig):
     def connection_str(self) -> str:
         return f"{self.scheme}://{self.username}:{self.password.get_secret_value()}@{self.host}:{self.port}/{self.database}"
 
+
 class MSSqlConfig(DatabaseConfig):
     type = "mssql"
     scheme: Optional[str] = "mssql+pyodbc"
@@ -40,7 +41,11 @@ class MSSqlConfig(DatabaseConfig):
     driver: str
 
     def connection_str(self) -> str:
-        return f"{self.scheme}://{self.username}:{self.password.get_secret_value()}@{self.host}:{self.port}/{self.database}"+f"?driver={self.driver}"
+        return (
+            f"{self.scheme}://{self.username}:{self.password.get_secret_value()}@{self.host}:{self.port}/{self.database}"
+            + f"?driver={self.driver}"
+        )
+
 
 class S3Config(Config):
     type = "s3"
