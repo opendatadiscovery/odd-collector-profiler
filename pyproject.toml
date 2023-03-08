@@ -20,6 +20,7 @@ dataprofiler = [
     {version = "^0.8.8", markers="sys_platform == 'darwin'"}
 ]
 tensorflow-macos = { version = "2.11.0", markers = "sys_platform == 'darwin'" }
+tensorflow = { version = "2.11.0", markers = "sys_platform == 'linux'" }
 scikit-learn = { version = "^1.2.1", markers = "sys_platform == 'darwin'" }
 oddrn-generator = "^0.1.70"
 

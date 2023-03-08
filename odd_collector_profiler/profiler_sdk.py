@@ -1,14 +1,16 @@
 import asyncio
 import importlib
+import signal
 import traceback
 from functools import partial
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from aiohttp import ClientSession
 from funcy import cached_property
 from odd_collector_sdk.api.datasource_api import PlatformApi
 from odd_collector_sdk.api.http_client import HttpClient
+from odd_collector_sdk.shutdown import shutdown
 from odd_models.models import DatasetStatisticsList
 
 from odd_collector_profiler.domain.collector_profiler_config import (
@@ -33,7 +35,7 @@ def register_profiler(cfg: Dict[str, Any]):
 
 
 class ProfilerSDK:
-    def __init__(self, config_path: Path):
+    def __init__(self, config_path: Path) -> None:
         self.config = CollectorProfilerConfig.from_yaml(str(config_path))
         self.client = HttpClient(self.config.token)
         self.api = PlatformApi(self.client, self.config.platform_host_url)
@@ -72,8 +74,7 @@ class ProfilerSDK:
 
     async def __get_statistics(self, profiler: Profiler):
         result = profiler.get_statistics()
-        res = await result if asyncio.iscoroutine(result) else result
-        return res
+        return await result if asyncio.iscoroutine(result) else result
 
     async def __request(
         self, statistics: DatasetStatisticsList, session: ClientSession
@@ -85,3 +86,20 @@ class ProfilerSDK:
         )
         res.raise_for_status()
         return res
+
+    def run(self, loop: Optional[asyncio.AbstractEventLoop] = None):
+        try:
+            if not loop:
+                loop = asyncio.get_event_loop()
+
+            signals = (signal.SIGHUP, signal.SIGTERM, signal.SIGINT)
+            for s in signals:
+                loop.add_signal_handler(
+                    s, lambda s=s: asyncio.create_task(shutdown(s, loop))
+                )
+
+            self.start_polling()
+            loop.run_forever()
+        except Exception as e:
+            logger.debug(traceback.format_exc())
+            logger.error(e)
