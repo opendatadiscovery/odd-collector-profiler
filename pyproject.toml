@@ -17,6 +17,7 @@ funcy = "^1.17"
 dataprofiler = {version = "^0.8.8", extras = ["full"]}
 oddrn-generator = "^0.1.70"
 pyodbc = "^4.0.35"
+pymysql = "^1.0.2"
 
 
 [tool.poetry.group.dev.dependencies]
