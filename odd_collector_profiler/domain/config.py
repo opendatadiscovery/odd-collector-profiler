@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
 from textwrap import dedent
+from typing import List, Optional
 
 from pydantic import BaseModel, SecretStr
 from sqlalchemy.engine import URL
@@ -49,7 +49,7 @@ class AzureSQLConfig(DatabaseConfig):
 
     def connection_str(self) -> str:
         connection_string = dedent(
-            '''
+            """
             Driver={driver};
             Server={server};
             Database={database};
@@ -58,18 +58,17 @@ class AzureSQLConfig(DatabaseConfig):
             Encrypt={encrypt};
             TrustServerCertificate={trust_server_certificate};
             Connection Timeout={connection_timeout};
-            '''.format(
-                driver='{ODBC Driver 18 for SQL Server}',
+            """.format(
+                driver="{ODBC Driver 18 for SQL Server}",
                 database=self.database,
-                server='{server_name}.database.windows.net,{port}'.format(
-                    server_name=self.server,
-                    port=self.port
+                server="{server_name}.database.windows.net,{port}".format(
+                    server_name=self.server, port=self.port
                 ),
                 username=self.username,
                 password=self.password,
                 encrypt=self.encrypt,
                 trust_server_certificate=self.trust_server_certificate,
-                connection_timeout=self.connection_timeout
+                connection_timeout=self.connection_timeout,
             )
         )
 

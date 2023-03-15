@@ -25,7 +25,7 @@ class AzureSQLProfiler(Profiler, SQLDialect):
         super().__init__(config, data_profiler)
         self.generator = AzureSQLGenerator(
             host_settings=f"{self.config.server}.database.windows.net:{self.config.port}",
-            databases=self.config.database
+            databases=self.config.database,
         )
 
     def get_statistics(self) -> DatasetStatisticsList:
@@ -46,7 +46,6 @@ class AzureSQLProfiler(Profiler, SQLDialect):
     def get_dataset_statistic(
         self, schema: str, table: str, connection: Connection
     ) -> DataSetStatistics:
-
         reader = TableDataframeReader(table=table, schema=schema, connection=connection)
 
         self.generator.set_oddrn_paths(schemas=schema, tables=table)
