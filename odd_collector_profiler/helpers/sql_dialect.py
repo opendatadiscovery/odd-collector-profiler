@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from typing import Iterable
+from typing import Iterable, Set
 
 import pandas as pd
 from sqlalchemy import create_engine, inspect
@@ -14,7 +14,7 @@ def get_data_frame(table_name: str, connection: Connection):
 
 class SQLDialect:
     config: DatabaseConfig
-    skip_schemas: set[str] = {"information_schema"}
+    skip_schemas: Set[str] = {"information_schema"}
 
     @property
     def engine(self) -> Engine:
