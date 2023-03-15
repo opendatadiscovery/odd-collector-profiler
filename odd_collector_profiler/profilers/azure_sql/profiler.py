@@ -32,6 +32,7 @@ class AzureSQLProfiler(Profiler, SQLDialect):
         items: List[DataSetStatistics] = []
 
         with self.connect() as connection:
+            # The principal_id field is an ID of the principal that owns this schema.
             query = "SELECT name FROM sys.schemas WHERE principal_id=1"
             query_result = connection.execute(text(query))
             main_schemas = [i[0] for i in query_result.fetchall()]
