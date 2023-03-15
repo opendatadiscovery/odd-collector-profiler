@@ -24,7 +24,7 @@ class AzureSQLProfiler(Profiler, SQLDialect):
     def __init__(self, config: Dict[str, Any], data_profiler: DataProfiler):
         super().__init__(config, data_profiler)
         self.generator = AzureSQLGenerator(
-            host_settings=f"{self.config.server}.database.windows.net:{self.config.port}",
+            host_settings=f"{self.config.server}:{self.config.port}",
             databases=self.config.database,
         )
 

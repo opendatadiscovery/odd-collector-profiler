@@ -61,7 +61,7 @@ class AzureSQLConfig(DatabaseConfig):
             """.format(
                 driver="{ODBC Driver 18 for SQL Server}",
                 database=self.database,
-                server="{server_name}.database.windows.net,{port}".format(
+                server="{server_name},{port}".format(
                     server_name=self.server, port=self.port
                 ),
                 username=self.username,
