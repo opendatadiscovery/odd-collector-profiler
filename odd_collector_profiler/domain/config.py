@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from textwrap import dedent
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from pydantic import BaseModel, SecretStr
 from sqlalchemy.engine import URL
@@ -13,6 +13,7 @@ class Config(BaseModel):
 
 class DatabaseConfig(ABC, Config):
     tables: Optional[List[str]] = None
+    filters: Optional[Dict[str, List[str]]] = None
 
     @abstractmethod
     def connection_str(self) -> str:
