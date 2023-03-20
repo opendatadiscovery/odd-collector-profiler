@@ -14,6 +14,10 @@ RUN curl -s -o microsoft.asc https://packages.microsoft.com/keys/microsoft.asc \
     && curl -s -o mssql-release.list https://packages.microsoft.com/config/debian/10/prod.list \
     && apt-get install -y g++
 
+RUN curl -s -o microsoft.asc https://packages.microsoft.com/keys/microsoft.asc \
+    && curl -s -o mssql-release.list https://packages.microsoft.com/config/debian/10/prod.list \
+    && apt-get install -y g++
+
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
 FROM python AS build

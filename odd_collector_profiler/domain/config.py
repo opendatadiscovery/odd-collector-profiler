@@ -86,5 +86,4 @@ class AzureSQLConfig(DatabaseConfig):
                 connection_timeout=self.connection_timeout,
             )
         )
-
         return URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})

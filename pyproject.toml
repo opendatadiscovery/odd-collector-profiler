@@ -15,14 +15,14 @@ odd-collector-sdk = "^0.3.21"
 tzlocal = "^4.2"
 funcy = "^1.17"
 pyodbc = "^4.0.35"
+oddrn-generator = "^0.1.70"
+tensorflow-macos = { version = "2.11.0", markers = "sys_platform == 'darwin'" }
+tensorflow = { version = "2.11.0", markers = "sys_platform == 'linux'" }
+scikit-learn = { version = "^1.2.1", markers = "sys_platform == 'darwin'" }
 dataprofiler = [
     {version = "^0.8.8", extras = ["ml"], markers = "sys_platform == 'linux'"},
     {version = "^0.8.8", markers="sys_platform == 'darwin'"}
 ]
-tensorflow-macos = { version = "2.11.0", markers = "sys_platform == 'darwin'" }
-tensorflow = { version = "2.11.0", markers = "sys_platform == 'linux'" }
-scikit-learn = { version = "^1.2.1", markers = "sys_platform == 'darwin'" }
-oddrn-generator = "^0.1.70"
 
 
 [tool.poetry.group.dev.dependencies]
