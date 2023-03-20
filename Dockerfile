@@ -1,4 +1,4 @@
-FROM python:3.9.12-slim-buster AS python
+FROM python:3.9.16-slim AS python
 ENV PATH=$PATH:/root/.local/bin
 WORKDIR /app
 
@@ -8,7 +8,15 @@ RUN apt-get update && \
     libpq-dev \
     gcc \
     unixodbc \
-    unixodbc-dev 
+    unixodbc-dev
+
+RUN curl -s -o microsoft.asc https://packages.microsoft.com/keys/microsoft.asc \
+    && curl -s -o mssql-release.list https://packages.microsoft.com/config/debian/10/prod.list \
+    && apt-get install -y g++
+
+RUN curl -s -o microsoft.asc https://packages.microsoft.com/keys/microsoft.asc \
+    && curl -s -o mssql-release.list https://packages.microsoft.com/config/debian/10/prod.list \
+    && apt-get install -y g++
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
@@ -31,6 +39,7 @@ RUN apt-get install -y mssql-tools18
 RUN echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
 
 COPY poetry.lock pyproject.toml ./
+
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-root --no-dev -vvv
 

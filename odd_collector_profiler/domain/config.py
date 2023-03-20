@@ -36,6 +36,21 @@ class S3Config(Config):
     type = "s3"
 
 
+class MSSqlConfig(DatabaseConfig):
+    type = "mssql"
+    scheme: Optional[str] = "mssql+pyodbc"
+    host: str
+    port: int
+    username: str
+    password: Optional[SecretStr] = SecretStr("")
+
+    def connection_str(self) -> str:
+        return (
+            f"{self.scheme}://{self.username}:{self.password.get_secret_value()}@{self.host}:{self.port}/{self.database}"
+            + f"?driver={self.driver}"
+        )
+
+
 class AzureSQLConfig(DatabaseConfig):
     type = "azure_sql"
     database: str
@@ -71,5 +86,4 @@ class AzureSQLConfig(DatabaseConfig):
                 connection_timeout=self.connection_timeout,
             )
         )
-
         return URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
