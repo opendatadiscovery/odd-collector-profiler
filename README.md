@@ -13,6 +13,7 @@ Reads batch of data and uses [DataProfiler](https://github.com/capitalone/DataPr
 
 ## Supported data sources
 - [x] **Postgres**
+- [x] **Azure SQL**
 
 ## Config example
 
