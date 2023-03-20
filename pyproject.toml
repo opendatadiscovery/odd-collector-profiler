@@ -23,6 +23,7 @@ dataprofiler = [
     {version = "^0.8.8", extras = ["ml"], markers = "sys_platform == 'linux'"},
     {version = "^0.8.8", markers="sys_platform == 'darwin'"}
 ]
+pymysql = "^1.0.2"
 
 
 [tool.poetry.group.dev.dependencies]

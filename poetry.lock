@@ -1729,6 +1729,22 @@ dotenv = ["python-dotenv (>=0.10.4)"]
 email = ["email-validator (>=1.0.3)"]
 
 [[package]]
+name = "pymysql"
+version = "1.0.2"
+description = "Pure Python MySQL Driver"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "PyMySQL-1.0.2-py3-none-any.whl", hash = "sha256:41fc3a0c5013d5f039639442321185532e3e2c8924687abe6537de157d403641"},
+    {file = "PyMySQL-1.0.2.tar.gz", hash = "sha256:816927a350f38d56072aeca5dfb10221fe1dc653745853d30a216637f5d7ad36"},
+]
+
+[package.extras]
+ed25519 = ["PyNaCl (>=1.4.0)"]
+rsa = ["cryptography"]
+
+[[package]]
 name = "pyodbc"
 version = "4.0.35"
 description = "DB API Module for ODBC"
@@ -2930,4 +2946,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.11"
-content-hash = "caed79461050923945aa8ab5bc9430ddc4035855b2c5678bcd45b7bfed73f7be"
+content-hash = "c742e6a35849d93c27c59609a6066e36fe5ca57a288baf3fe22cd6bb65910089"

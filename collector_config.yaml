@@ -4,8 +4,8 @@ platform_host_url: http://localhost:8080
 profilers:
   - type: <type>
     name: <name>
-    host: localhost
-    username: <user>
+    host: <host>
+    username: <username>
     password: <password>
     port: <port>
     database: <database>

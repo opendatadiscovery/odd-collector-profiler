@@ -51,6 +51,20 @@ class MSSqlConfig(DatabaseConfig):
         )
 
 
+class MySqlConfig(DatabaseConfig):
+    type = "mysql"
+    scheme: Optional[str] = "mysql+pymysql"
+    host: str
+    port: int
+    username: str
+    password: Optional[SecretStr] = SecretStr("")
+    database: str
+    sample_size: Optional[int] = None
+
+    def connection_str(self) -> str:
+        return f"{self.scheme}://{self.username}:{self.password.get_secret_value()}@{self.host}:{self.port}/{self.database}"
+
+
 class AzureSQLConfig(DatabaseConfig):
     type = "azure_sql"
     database: str
