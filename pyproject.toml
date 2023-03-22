@@ -14,7 +14,6 @@ psycopg2 = "^2.9.3"
 odd-collector-sdk = "^0.3.21"
 tzlocal = "^4.2"
 funcy = "^1.17"
-pyodbc = "^4.0.35"
 oddrn-generator = "^0.1.70"
 tensorflow-macos = { version = "2.11.0", markers = "sys_platform == 'darwin'" }
 tensorflow = { version = "2.11.0", markers = "sys_platform == 'linux'" }
@@ -24,6 +23,7 @@ dataprofiler = [
     {version = "^0.8.8", markers="sys_platform == 'darwin'"}
 ]
 pymysql = "^1.0.2"
+pyodbc = "^4.0.35"
 
 
 [tool.poetry.group.dev.dependencies]

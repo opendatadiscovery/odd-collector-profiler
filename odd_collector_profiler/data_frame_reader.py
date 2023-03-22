@@ -1,6 +1,6 @@
 import traceback
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Any, Optional
 
 import pandas as pd
 from sqlalchemy.engine import Connection
@@ -15,20 +15,29 @@ class DataFrameReader(ABC):
 
 
 class TableDataframeReader(DataFrameReader):
-    def __init__(
-        self, table: str, connection: Connection, schema: Optional[str] = None
-    ):
+    def __init__(self, table: Any, connection: Connection):
         self.table = table
         self.connection = connection
-        self.schema = schema
 
-    def read(self, sample_size: Optional[int] = None) -> pd.DataFrame:
+    def read(self) -> pd.DataFrame:
         try:
             return pd.read_sql_table(
-                table_name=self.table,
-                schema=self.schema,
+                table_name=self.table.name,
+                schema=self.table.schema,
                 con=self.connection,
-            ).sample(sample_size)
+            )
         except Exception as e:
             logger.debug(traceback.format_exc())
             logger.error(f"Getting data frame, {e}")
+
+
+def read_table(table: Any, connection: Connection) -> pd.DataFrame:
+    try:
+        return pd.read_sql_table(
+            table_name=table.name,
+            schema=table.schema,
+            con=connection,
+        )
+    except Exception as e:
+        logger.debug(traceback.format_exc())
+        logger.error(f"Getting data frame, {e}")

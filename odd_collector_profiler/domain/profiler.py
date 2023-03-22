@@ -4,8 +4,6 @@ from typing import Any, Dict, Type, TypeVar
 from odd_models.models import DataSetStatistics
 from pydantic import ValidationError
 
-from odd_collector_profiler.services.data_profiler import DataProfiler
-
 from ..errors import InvalidConfigError
 from .config import Config
 
@@ -16,15 +14,12 @@ class Profiler(ABC):
     """
     Abstract class for datasource profilers
     :param config_model describes config for certain datasource, i.e PostgresConfig
-    :param data_profiler is 3rd part library generates reports
     """
 
     config_model: Type[T]
-    data_profiler: DataProfiler = None
 
-    def __init__(self, config: Dict[str, Any], data_profiler: DataProfiler):
+    def __init__(self, config: Dict[str, Any]):
         self.config = self._create_config(config)
-        self.data_profiler = data_profiler
 
     def _create_config(self, config: Dict[str, Any]) -> T:
         try:

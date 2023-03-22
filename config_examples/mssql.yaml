@@ -1,13 +1,13 @@
-default_pulling_interval: 10
-token:  <platform_token>
-platform_host_url: <platform_host> # http://localhost:8080
+default_pulling_interval: 100
+token: <platform_token>
+platform_host_url: <platform_url> # http://localhost:8080
 profilers:
-  - type: postgres
-    name: postgres_adapter
+  - type: mssql
+    name: mssql_adapter
     host: <host>
     port: <port>
     username: <username>
-    password: <password> # Optional, default SecretStr("")
+    password: <password>
     database: <database>
     filters:
       {'schema_name': ['table_name']} # Optional dictionary where key is a schema name and value is a list of table names.

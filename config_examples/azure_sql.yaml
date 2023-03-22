@@ -1,6 +1,6 @@
 default_pulling_interval: 10
-token: ""
-platform_host_url: http://localhost:8080
+token: <platform_token>
+platform_host_url: <platform_url> # http://localhost:8080
 plugins:
   - type: azure_sql
     name: azure_sql_adapter
@@ -11,10 +11,10 @@ plugins:
     port: <port>
     username: <username>
     password: <password>
-    encrypt: "Expected values: 'yes'|'no'. Default is 'yes' "
-    trust_server_certificate: "Expected values: 'yes'|'no'. Default is 'no' "
-    connection_timeout: "Default value is 30"
+    encrypt: "yes" # "Expected values: 'yes'|'no'. Default is 'yes' "
+    trust_server_certificate: "no" # "Expected values: 'yes'|'no'. Default is 'no' "
+    connection_timeout: 30 # "Default is 30"
     filters:
-      {'schema_name': ['table_name']} # Dictionary where key is a schema name and value is a list of table names.
+      {'schema_name': ['table_name']} # Optional dictionary where key is a schema name and value is a list of table names.
                                       # If present - profiler generates statistics only for tables according schema.
                                       # If skipped - profiler generates statistics for all tables.
