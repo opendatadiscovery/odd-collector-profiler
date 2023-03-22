@@ -3,7 +3,6 @@ from typing import Any, Dict, List, Tuple
 from funcy import lmap
 from odd_models.models import DataSetFieldStat, DataSetStatistics, DatasetStatisticsList
 from oddrn_generator import AzureSQLGenerator
-from sqlalchemy import text
 from sqlalchemy.engine import Connection
 
 from odd_collector_profiler.domain.config import AzureSQLConfig
@@ -32,7 +31,7 @@ class AzureSQLProfiler(Profiler, SQLDialect):
         items: List[DataSetStatistics] = []
 
         with self.connect() as connection:
-            data = self.get_schemas_tables()
+            data = self.get_base_table_info()
             for schema in data:
                 items.extend(
                     self.get_dataset_statistic(schema, table, connection)

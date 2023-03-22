@@ -1,6 +1,6 @@
 from collections import defaultdict
 from contextlib import contextmanager
-from typing import Iterable, Set
+from typing import Dict, Iterable, List, Set
 
 import pandas as pd
 from sqlalchemy import create_engine, inspect, text
@@ -36,12 +36,12 @@ class SQLDialect:
         for table_name in tables:
             yield table_name
 
-    def get_schemas_tables(self):
+    def get_base_table_info(self) -> Dict[str, List[str]]:
         """
         Get main schemas and tables as dict:
         {schema_name: [table_name,...,]}
         """
-        if not self.config.filters:
+        if self.config.filters:
             return self.config.filters
 
         # Query to get all information about base table.
@@ -50,14 +50,15 @@ class SQLDialect:
                 table_schema,
                 table_name
             FROM information_schema.tables
-            WHERE TABLE_TYPE <> 'VIEW'
+            WHERE TABLE_TYPE = 'BASE TABLE'
         """
         with self.connect() as connection:
             result_as_dict = defaultdict(list)
             query_result = connection.execute(text(query))
-            a = query_result.fetchall()
-            for i in a:
-                result_as_dict[i[0]].append(i[1])
+            tuple_with_schema_table = query_result.fetchall()
+
+            for schema, table in tuple_with_schema_table:
+                result_as_dict[schema].append(table)
 
             return result_as_dict
 
