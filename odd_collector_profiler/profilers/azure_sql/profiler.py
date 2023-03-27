@@ -3,7 +3,7 @@ from typing import Any
 from oddrn_generator import AzureSQLGenerator
 
 from odd_collector_profiler.datasource.database.profiler import RDBProfiler
-from odd_collector_profiler.datasource.database.repository import RDBRepository
+from odd_collector_profiler.datasource.database.repository import AzureSLQRepository
 from odd_collector_profiler.domain.config import AzureSQLConfig
 from odd_collector_profiler.domain.profiler import Profiler
 from odd_collector_profiler.profilers import DATA_PROFILER
@@ -31,8 +31,10 @@ class AzureProfiler(RDBProfiler):
 
 def register_profiler(config: dict[str, Any]) -> Profiler:
     config = AzureSQLConfig.parse_obj(config)
-    repository = RDBRepository(config=config, skip_schemas=SYS_SCHEMAS)
-    generator = AzureSQLGenerator(host_settings=config.host, databases=config.database)
+    repository = AzureSLQRepository(config=config, skip_schemas=SYS_SCHEMAS)
+    generator = AzureSQLGenerator(
+        host_settings=f"{config.host}:{config.port}", databases=config.database
+    )
 
     return AzureProfiler(
         config=config,

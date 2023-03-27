@@ -70,3 +70,7 @@ class MySQLRepository(RDBRepository):
         for table_name in self._get_tables_by(self.config.database):
             if not self.config.filters or table_name in self.config.filters:
                 yield Table(database=self.config.database, schema=None, name=table_name)
+
+
+class AzureSLQRepository(RDBRepository):
+    skip_schemas = set()
