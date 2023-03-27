@@ -1,9 +1,6 @@
 import asyncio
-import logging
-import os
 from pathlib import Path
 
-from odd_collector_profiler.logger import logger
 from odd_collector_profiler.profiler_sdk import ProfilerSDK
 
 if __name__ == "__main__":

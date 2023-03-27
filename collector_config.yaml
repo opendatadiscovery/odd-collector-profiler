@@ -1,11 +1,11 @@
 default_pulling_interval: 100
-token: <token>
+token:
 platform_host_url: http://localhost:8080
 profilers:
-  - type: <type>
-    name: <name>
+  - type: <adapter_type>
+    name: <adapter_name>
     host: <host>
+    port: <port>
     username: <username>
     password: <password>
-    port: <port>
     database: <database>

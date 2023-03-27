@@ -7,6 +7,7 @@ Reads batch of data and uses [DataProfiler](https://github.com/capitalone/DataPr
   - [Config example](#config-example)
   - [Docker build](#docker-build)
   - [M1 Issue](#m1-issue)
+    - [Pyodbc](#pyodbc)
     - [**grpcio**](#grpcio)
     - [**tensorflow**](#tensorflow)
 
@@ -48,6 +49,12 @@ docker build . -t odd_collector_profiler
 ```
 
 ## M1 Issue
+
+### Pyodbc
+On M1 pyodbc needs to be installed as no-binary. Command below will add that info to `poetry.toml`:
+```shell
+poetry config --local installer.no-binary pyodbc
+```
 
 ### **grpcio**
 Needs an env variables:

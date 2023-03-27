@@ -6,11 +6,10 @@ from functools import partial
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from aiohttp import ClientSession
 from funcy import cached_property
 from odd_collector_sdk.api.datasource_api import PlatformApi
 from odd_collector_sdk.api.http_client import HttpClient
-from odd_collector_sdk.shutdown import shutdown
+from odd_collector_sdk.shutdown import shutdown_by
 from odd_models.models import DatasetStatisticsList
 
 from odd_collector_profiler.domain.collector_profiler_config import (
@@ -39,6 +38,7 @@ class ProfilerSDK:
         self.config = CollectorProfilerConfig.from_yaml(str(config_path))
         self.client = HttpClient(self.config.token)
         self.api = PlatformApi(self.client, self.config.platform_host_url)
+
         self.task_runner = TaskRunner(
             self.__ingest_stats, self.config.default_pulling_interval
         )
@@ -53,19 +53,18 @@ class ProfilerSDK:
         self.task_runner.start()
 
     async def __ingest_stats(self):
-        async with ClientSession() as session:
-            send_request = partial(self.__send_request, session=session)
-            tasks = [
-                asyncio.create_task(send_request(profiler=profiler))
-                for profiler in self.profilers
-            ]
-            res = await handle_tasks(tasks)
+        send_request = partial(self.__send_request)
+        tasks = [
+            asyncio.create_task(send_request(profiler=profiler))
+            for profiler in self.profilers
+        ]
+        await handle_tasks(tasks)
 
-    async def __send_request(self, profiler: Profiler, session: ClientSession):
+    async def __send_request(self, profiler: Profiler):
         logger.debug(f"[{profiler.config.name}] Start calculating statistics")
         try:
             dsl = await self.__get_statistics(profiler)
-            res = await self.__request(dsl, session)
+            res = await self.__request(dsl)
             logger.success(f"[{profiler.config.name}] Metadata ingested")
             return res
         except Exception as e:
@@ -76,13 +75,10 @@ class ProfilerSDK:
         result = profiler.get_statistics()
         return await result if asyncio.iscoroutine(result) else result
 
-    async def __request(
-        self, statistics: DatasetStatisticsList, session: ClientSession
-    ):
+    async def __request(self, statistics: DatasetStatisticsList):
         res = await self.client.post(
             f"{self.config.platform_host_url}/ingestion/entities/datasets/stats",
             statistics.json(),
-            session,
         )
         res.raise_for_status()
         return res
@@ -95,7 +91,7 @@ class ProfilerSDK:
             signals = (signal.SIGHUP, signal.SIGTERM, signal.SIGINT)
             for s in signals:
                 loop.add_signal_handler(
-                    s, lambda s=s: asyncio.create_task(shutdown(s, loop))
+                    s, lambda s=s: asyncio.create_task(shutdown_by(s, loop))
                 )
 
             self.start_polling()

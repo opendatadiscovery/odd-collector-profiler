@@ -13,6 +13,7 @@ class Config(BaseModel):
 
 class DatabaseConfig(ABC, Config):
     tables: Optional[List[str]] = None
+    filters: Optional[dict[str, list[str]]] = None
 
     @abstractmethod
     def connection_str(self) -> str:
@@ -36,21 +37,6 @@ class S3Config(Config):
     type = "s3"
 
 
-class MSSqlConfig(DatabaseConfig):
-    type = "mssql"
-    scheme: Optional[str] = "mssql+pyodbc"
-    host: str
-    port: int
-    username: str
-    password: Optional[SecretStr] = SecretStr("")
-
-    def connection_str(self) -> str:
-        return (
-            f"{self.scheme}://{self.username}:{self.password.get_secret_value()}@{self.host}:{self.port}/{self.database}"
-            + f"?driver={self.driver}"
-        )
-
-
 class MySqlConfig(DatabaseConfig):
     type = "mysql"
     scheme: Optional[str] = "mysql+pymysql"
@@ -59,16 +45,16 @@ class MySqlConfig(DatabaseConfig):
     username: str
     password: Optional[SecretStr] = SecretStr("")
     database: str
-    sample_size: Optional[int] = None
+    filters: Optional[list[str]] = None
 
     def connection_str(self) -> str:
         return f"{self.scheme}://{self.username}:{self.password.get_secret_value()}@{self.host}:{self.port}/{self.database}"
 
 
-class AzureSQLConfig(DatabaseConfig):
-    type = "azure_sql"
+class MSSqlConfig(DatabaseConfig):
+    type = "mssql"
     database: str
-    server: str
+    host: str
     port: str
     username: str
     password: str
@@ -80,7 +66,7 @@ class AzureSQLConfig(DatabaseConfig):
         connection_string = dedent(
             """
             Driver={driver};
-            Server={server};
+            Server={host};
             Database={database};
             Uid={username};
             Pwd={password};
@@ -90,8 +76,8 @@ class AzureSQLConfig(DatabaseConfig):
             """.format(
                 driver="{ODBC Driver 18 for SQL Server}",
                 database=self.database,
-                server="{server_name},{port}".format(
-                    server_name=self.server, port=self.port
+                host="{server_name},{port}".format(
+                    server_name=self.host, port=self.port
                 ),
                 username=self.username,
                 password=self.password,
@@ -101,3 +87,7 @@ class AzureSQLConfig(DatabaseConfig):
             )
         )
         return URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
+
+
+class AzureSQLConfig(MSSqlConfig):
+    type = "azure_sql"
