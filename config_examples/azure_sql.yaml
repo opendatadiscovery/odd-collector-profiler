@@ -1,7 +1,7 @@
 default_pulling_interval: 10
 token: <platform_token>
 platform_host_url: <platform_url> # http://localhost:8080
-plugins:
+profilers:
   - type: azure_sql
     name: azure_sql_adapter
     database: <database name>
