@@ -1,0 +1,18 @@
+default_pulling_interval: 10
+token: <platform_token>
+platform_host_url: <platform_url> # http://localhost:8080
+profilers:
+  - type: clickhouse
+    name: clickhouse_adapter
+    database: <database name>
+    host: <hostname>
+    port: <port>
+    username: <username>
+    password: <password>
+    secure: False
+    verify: True
+    query_limit: 0 # Optional string, default 0
+    filters:
+      {'schema_name': ['table_name']} # Optional dictionary where key is a schema name and value is a list of table names.
+                                      # If present - profiler generates statistics only for tables according schema.
+                                      # If skipped - profiler generates statistics for all tables.

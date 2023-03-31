@@ -13,6 +13,8 @@ from odd_collector_profiler.domain.profiler import Profiler
 from odd_collector_profiler.domain.statistics.column_statistic import ColumnStatistic
 from odd_collector_profiler.logger import logger
 
+RDBS_WITHOUT_SCHEMA = ["clickhouse"]
+
 
 class RDBProfiler(Profiler):
     def __init__(
@@ -44,7 +46,10 @@ class RDBProfiler(Profiler):
         return DatasetStatisticsList(items=items)
 
     def get_table_oddrn(self, table: Table) -> str:
-        self.generator.set_oddrn_paths(schemas=table.schema, tables=table.name)
+        if self.config.type not in RDBS_WITHOUT_SCHEMA:
+            self.generator.set_oddrn_paths(schemas=table.schema, tables=table.name)
+        else:
+            self.generator.set_oddrn_paths(tables=table.name)
         return self.generator.get_oddrn_by_path("tables")
 
     def get_field_oddrn(self, c: ColumnStatistic) -> str:
