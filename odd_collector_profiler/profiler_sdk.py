@@ -94,8 +94,14 @@ class ProfilerSDK:
                     s, lambda s=s: asyncio.create_task(shutdown_by(s, loop))
                 )
 
-            self.start_polling()
-            loop.run_forever()
+            if (
+                self.config.default_pulling_interval is None
+                or self.config.default_pulling_interval <= 0
+            ):
+                loop.run_until_complete(self.__ingest_stats())
+            else:
+                self.start_polling()
+                loop.run_forever()
         except Exception as e:
             logger.debug(traceback.format_exc())
             logger.error(e)
