@@ -91,3 +91,16 @@ class MSSqlConfig(DatabaseConfig):
 
 class AzureSQLConfig(MSSqlConfig):
     type = "azure_sql"
+
+
+class ClickHouseConfig(DatabaseConfig):
+    type = "clickhouse"
+    database: str
+    host: str
+    port: str
+    username: str
+    password: Optional[SecretStr] = SecretStr("")
+
+    def connection_str(self) -> str:
+        conn_str = f"clickhouse://{self.username}:{self.password}@{self.host}:{self.port}/{self.database}"
+        return conn_str

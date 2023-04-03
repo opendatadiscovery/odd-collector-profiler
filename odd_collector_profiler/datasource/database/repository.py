@@ -74,3 +74,12 @@ class MySQLRepository(RDBRepository):
 
 class AzureSLQRepository(RDBRepository):
     skip_schemas = set()
+
+
+class ClickHouseRepository(RDBRepository):
+    skip_schemas = set()
+
+    def get_tables(self) -> list[Table]:
+        for table_name in self._get_tables_by(self.config.database):
+            if not self.config.filters or table_name in self.config.filters:
+                yield Table(database=self.config.database, schema=None, name=table_name)
