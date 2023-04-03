@@ -99,10 +99,7 @@ class ClickHouseConfig(DatabaseConfig):
     host: str
     port: str
     username: str
-    password: str
-    secure: bool = False
-    verify: bool = True
-    query_limit: Optional[int] = 0
+    password: Optional[SecretStr] = SecretStr("")
 
     def connection_str(self) -> str:
         conn_str = f"clickhouse://{self.username}:{self.password}@{self.host}:{self.port}/{self.database}"
