@@ -9,8 +9,20 @@ from odd_collector_profiler.domain.profiler import Profiler
 from odd_collector_profiler.profilers import DATA_PROFILER
 
 
-SYS_SCHEMAS = {"xdb", "xs$null", "anonymous", "apex_040000", "apex_public_user", "ctxsys", "flows_files", "hr", "mdsys",
-               "outln", "sys", "system"}
+SYS_SCHEMAS = {
+    "xdb",
+    "xs$null",
+    "anonymous",
+    "apex_040000",
+    "apex_public_user",
+    "ctxsys",
+    "flows_files",
+    "hr",
+    "mdsys",
+    "outln",
+    "sys",
+    "system",
+}
 
 
 class OracleProfiler(RDBProfiler):

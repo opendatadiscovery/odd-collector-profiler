@@ -116,6 +116,8 @@ class OracleConfig(DatabaseConfig):
     thick_mode: Optional[bool] = False
 
     def connection_str(self) -> str:
-        conn_str = f"oracle+cx_oracle://{self.user}:{self.password.get_secret_value()}@{self.host}:{self.port}" \
-                   f"/?service_name={self.database}"
+        conn_str = (
+            f"oracle+cx_oracle://{self.user}:{self.password.get_secret_value()}@{self.host}:{self.port}"
+            f"/?service_name={self.database}"
+        )
         return conn_str
