@@ -8,7 +8,6 @@ from odd_collector_profiler.domain.config import OracleConfig
 from odd_collector_profiler.domain.profiler import Profiler
 from odd_collector_profiler.profilers import DATA_PROFILER
 
-
 SYS_SCHEMAS = {
     "xdb",
     "xs$null",

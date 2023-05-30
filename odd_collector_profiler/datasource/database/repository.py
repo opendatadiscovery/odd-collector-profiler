@@ -1,9 +1,7 @@
 import sys
-
-import oracledb
-
 from contextlib import contextmanager
 
+import oracledb
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.engine import Connection, Engine, Inspector
 
