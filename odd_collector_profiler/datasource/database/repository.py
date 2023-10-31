@@ -1,10 +1,12 @@
+import sys
 from contextlib import contextmanager
 
+import oracledb
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.engine import Connection, Engine, Inspector
 
 from odd_collector_profiler.datasource.database.table import Table
-from odd_collector_profiler.domain.config import DatabaseConfig
+from odd_collector_profiler.domain.config import DatabaseConfig, OracleConfig
 from odd_collector_profiler.logger import logger
 
 
@@ -83,3 +85,12 @@ class ClickHouseRepository(RDBRepository):
         for table_name in self._get_tables_by(self.config.database):
             if not self.config.filters or table_name in self.config.filters:
                 yield Table(database=self.config.database, schema=None, name=table_name)
+
+
+class OracleRepository(RDBRepository):
+    def __init__(self, config: OracleConfig, skip_schemas: set[str] = None) -> None:
+        super().__init__(config, skip_schemas)
+        oracledb.version = "8.3.0"
+        sys.modules["cx_Oracle"] = oracledb
+        if config.thick_mode:
+            oracledb.init_oracle_client()
