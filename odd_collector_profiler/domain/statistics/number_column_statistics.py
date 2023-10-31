@@ -25,8 +25,8 @@ class NumberColumnStatistic(ColumnStatistic):
         self.nulls_count = nulls_count
         self.unique_count = unique_count
 
-    def to_odd(self, oddrn: str) -> DataSetFieldStat:
-        data_entity = super().to_odd(oddrn)
+    def to_odd(self) -> DataSetFieldStat:
+        data_entity = super().to_odd()
         data_entity.number_stats = NumberFieldStat(
             low_value=self.low_value,
             high_value=self.high_value,
