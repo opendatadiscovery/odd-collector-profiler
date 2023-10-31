@@ -40,7 +40,7 @@ class RDBProfiler(Profiler):
             fields = {}
             for field_stat in profile:
                 field_oddrn = self.get_field_oddrn(field_stat)
-                fields[field_oddrn] = field_stat.to_odd(oddrn=field_oddrn)
+                fields[field_oddrn] = field_stat.to_odd()
             items.append(DataSetStatistics(dataset_oddrn=dataset_oddrn, fields=fields))
 
         return DatasetStatisticsList(items=items)

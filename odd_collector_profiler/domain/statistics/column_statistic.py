@@ -13,6 +13,6 @@ class ColumnStatistic(ABC):
         self.column_name = column_name
         self.tags = tags or []
 
-    def to_odd(self, oddrn: str) -> DataSetFieldStat:
+    def to_odd(self) -> DataSetFieldStat:
         tags = [Tag(name=name) for name in self.tags]
-        return DataSetFieldStat(tags=tags, field_oddrn=oddrn)
+        return DataSetFieldStat(tags=tags)
