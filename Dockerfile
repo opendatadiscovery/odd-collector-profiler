@@ -1,4 +1,4 @@
-FROM python:3 AS python
+FROM python:3.9.16 AS python
 ENV PYTHONUNBUFFERED=true
 ENV PATH=$PATH:/root/.local/bin
 WORKDIR /app
