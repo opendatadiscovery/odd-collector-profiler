@@ -12,8 +12,8 @@ RUN apt-get update && \
     unixodbc \
     unixodbc-dev \
     g++ \
-    python-dev \
-    python3-dev
+    python \
+    python3
 
 # For pyodbc
 ENV ACCEPT_EULA=Y
