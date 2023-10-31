@@ -1,11 +1,11 @@
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pyaml_env import parse_config
 from pydantic import BaseSettings
 
 
 class CollectorProfilerConfig(BaseSettings):
-    default_pulling_interval: int
+    default_pulling_interval: Optional[int] = None
     token: str
     profilers: List[Any]
     platform_host_url: str
