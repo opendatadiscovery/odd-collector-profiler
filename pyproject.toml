@@ -8,20 +8,21 @@ packages = [{include = "odd_collector_profiler"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.11"
-SQLAlchemy = "^1.4.41"
-scipy = "^1.9.1"
-psycopg2 = "^2.9.3"
-odd-collector-sdk = "^0.3.21"
-tzlocal = "^4.2"
-funcy = "^1.17"
-oddrn-generator = "^0.1.70"
-dataprofiler = "0.8.8"
-tensorflow= { version = "2.12.0", markers = "sys_platform == 'linux' and platform_machine == 'amd64'" }
-tensorflow_cpu_aws= { version = "2.12.0", markers = "sys_platform == 'linux' and platform_machine=='aarch64'" }
+SQLAlchemy = "^2.0.29"
+scipy = "^1.13.0"
+psycopg2 = "^2.9.9"
+odd-collector-sdk = "^0.3.25"
+tzlocal = "^4.3.1"
+funcy = "^1.18"
+oddrn-generator = "^0.1.100"
+dataprofiler = {version = "0.10.9", extras = ["ml"]}
+tensorflow = { version = "2.12.0", markers = "sys_platform == 'linux' and platform_machine == 'amd64'" }
+tensorflow_cpu_aws = { version = "2.12.0", markers = "sys_platform == 'linux' and platform_machine=='aarch64'" }
 tensorflow-macos = { version = "2.12.0", markers = "sys_platform == 'darwin' and platform_machine == 'arm64'" }
-pymysql = "^1.0.2"
-pyodbc = "^4.0.35"
-scikit-learn = "^1.2.2"
+pymysql = "^1.1.0"
+pyodbc = "^4.0.39"
+scikit-learn = "^1.4.1.post1"
+pandas = "^2.2.1"
 
 
 [tool.poetry.group.dev.dependencies]
